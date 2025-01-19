@@ -1,9 +1,28 @@
 #include <iostream>
+#include <string>
 #include "Employee.h"
 #include "Circle.hpp"
 #include "Point.hpp"
 #include "DynamicMatrix.hpp"
+#include "Car.hpp"
 using namespace std;
+
+struct car_str{
+    string make;
+    string model;
+    int year;
+
+    car_str(const string& make,const string& model,int year){
+        this->make=make;
+        this->model=model;
+        this->year=year;
+    }
+    void print(){
+        std::cout<<"make : "<<make<<std::endl;
+        std::cout<<"model : "<<model<<std::endl;
+        std::cout<<"year : "<<year<<std::endl;
+    }
+};
 
 int main() {
     cout << "Hello, World!" << endl;
@@ -53,6 +72,16 @@ int main() {
     *second2D = *first2D;
 
     second2D->print();
+
+
+
+    Car *car_class = new Car("hello", "world", 123);
+    car_class->print();
+
+    car_str *car_ = new car_str("hello", "world",123);
+    car_->print();
+    
+
 
     return 0;
 }
