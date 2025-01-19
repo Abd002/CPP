@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Employee.h"
 #include "Circle.hpp"
+#include "Point.hpp"
 using namespace std;
 
 int main() {
@@ -24,6 +25,11 @@ int main() {
     cout<<second_circle.circumference()<<endl;
 
 
+
+    Point * first_point = new Point(5, 5);
+    first_point->print();
+
+    cout<<first_point->distanceTo(0 , 0)<<'\n';
 
 
     return 0;
