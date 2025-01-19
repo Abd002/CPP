@@ -2,6 +2,7 @@
 #include "Employee.h"
 #include "Circle.hpp"
 #include "Point.hpp"
+#include "DynamicMatrix.hpp"
 using namespace std;
 
 int main() {
@@ -31,6 +32,27 @@ int main() {
 
     cout<<first_point->distanceTo(0 , 0)<<'\n';
 
+
+    DynamicMatrix* first2D = new DynamicMatrix(3, 4);
+    for(int i=0;i<3;i++){
+        for(int j=0;j<4;j++){
+            first2D->setValue(i,j,i*3+j);
+        }
+    }
+    cout<<"first 2D print\n";
+    first2D->print();
+
+    DynamicMatrix*second2D = new DynamicMatrix(*first2D);
+
+    cout<<"second 2D print\n";
+    second2D->print();
+
+    second2D->setValue(0,0,5);
+    second2D->print();
+
+    *second2D = *first2D;
+
+    second2D->print();
 
     return 0;
 }
