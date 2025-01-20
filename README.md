@@ -106,3 +106,9 @@ void modify(int &x) {  // x is a reference/alias parameter
   - used for deallocates the memory to prevent memory leaks.
   - when u creat an instance it will be called when object goes out of scope -> stack allocation.
   - if u create the object using dynamic allocation `DynamicArray *arr = new DynamicArray(5);` it will be called after using `delete arr;` -> heap allocation.
+- ## **method chaining**
+  - what is this : `account.deposit(1000).withdraw(200).`
+  - to use it then `deposit and withdraw` methods should return refernce to the same class ex:`BankAccount &BankAccount::withdraw(int value)`
+- ## **Encapsulation**
+  - Marking data members as private to prevent direct modification from outside the class.
+  - Providing public getter and setter methods to control access to private data members.

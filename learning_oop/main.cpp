@@ -7,6 +7,7 @@
 #include "Car.hpp"
 #include "DynamicArray.hpp"
 #include "Book.hpp"
+#include "Customer.hpp"
 using namespace std;
 
 struct car_str
@@ -116,6 +117,11 @@ int main()
         book_arr[i].display();
     }
     delete[] book_arr;
+
+    Customer firstCustomer("abd002", 21, 10000, "12334568989");
+
+    firstCustomer.getBankAccount().withdraw(100).deposit(100);
+    cout << firstCustomer.getBankAccount().getBalance() << endl;
 
     return 0;
 }
