@@ -28,9 +28,13 @@ void modify(int &x) {  // x is a reference parameter
 - const member function`int getId() const;` guarantees not to modify the object
 - **deep copy** : creating a new object and allocating new memory for it
 - **shallow copy** : only copies the pointer, both objects share the same memory
+- use structs when u need
+  1. simple data container.
+  2. Direct access to all members is acceptable. Less secure (direct modification)
 - ## **copy constructor**
   syntax : `DynamicMatrix::DynamicMatrix(const DynamicMatrix &other)`
 - ## **assignment operator**
+
   - syntax : `DynamicMatrix& operator=(const DynamicMatrix &other);`
   - `DynamicMatrix&` : commonly used in assignment operators to support chained assignments.
     ex. a = b = c ;
@@ -39,9 +43,7 @@ void modify(int &x) {  // x is a reference parameter
     2. free old memory if exist
     3. copy data as required (deep or shallow)
     4. return `*this` which will return reference to current object
-- use structs when u need
-  1. simple data container.
-  2. Direct access to all members is acceptable. Less secure (direct modification)
+
 - ## **L-value and R-value**
 
   - `const std::string&` allows binding to both lvalues and rvalues because of **const**
@@ -72,12 +74,14 @@ void modify(int &x) {  // x is a reference parameter
     std::cout << s;  // ❌ Undefined behavior! (s is now empty)
     ```
   - in assignment operator in string class we will use Rvalue references with **move** to move data
-- **Access Specifier**
+- ## **Access Specifier**
   1. `public` -> accessible from anywhere
   2. `private` -> only accessible inside the class itself (or by friends of the class).
   3. `protected` -> accessible within the class and by derived classes (subclasses).
-- **friend**
+- ## **friend**
+
   - used to allow a specific function or class to access the private and protected members of another class.
+
   ```c
     class MyClass {
     private:
@@ -91,3 +95,9 @@ void modify(int &x) {  // x is a reference parameter
         friend void printX(const MyClass& obj);
     };
   ```
+
+- ## **Destructors**
+  - syntax ~className();
+  - used for deallocates the memory to prevent memory leaks.
+  - when u creat an instance it will be called when object goes out of scope -> stack allocation.
+  - if u create the object using dynamic allocation `DynamicArray *arr = new DynamicArray(5);` it will be called after using `delete arr;` -> heap allocation.
