@@ -17,7 +17,7 @@ delete[] arr;
 - dealing with **reference parameter**
 
 ```
-void modify(int &x) {  // x is a reference parameter
+void modify(int &x) {  // x is a reference/alias parameter
     x = 10;  // Modifies the original variable
 }
 ```
@@ -31,6 +31,11 @@ void modify(int &x) {  // x is a reference parameter
 - use structs when u need
   1. simple data container.
   2. Direct access to all members is acceptable. Less secure (direct modification)
+- You cannot dynamically allocate an array of Book objects using `new Book[3]` when the Book class only has a **parameterized constructor** (without a default constructor).
+  - ```c
+    Book(): title(""), price(0.0) {}; // ✅ Default constructor
+    Book(const std::string &title, double price); // Parameterized constructor
+    ```
 - ## **copy constructor**
   syntax : `DynamicMatrix::DynamicMatrix(const DynamicMatrix &other)`
 - ## **assignment operator**

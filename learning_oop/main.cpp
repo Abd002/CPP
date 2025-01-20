@@ -6,6 +6,7 @@
 #include "DynamicMatrix.hpp"
 #include "Car.hpp"
 #include "DynamicArray.hpp"
+#include "Book.hpp"
 using namespace std;
 
 struct car_str
@@ -27,6 +28,15 @@ struct car_str
         std::cout << "year : " << year << std::endl;
     }
 };
+
+void modifyWithPointer(int *x)
+{
+    (*x) += 10;
+}
+void modifyWithReference(int &x)
+{
+    x += 20;
+}
 
 int main()
 {
@@ -92,6 +102,20 @@ int main()
     }
     DynamicArray *arr = new DynamicArray(10);
     delete arr;
+
+    int x = 50;
+    modifyWithPointer(&x);
+    cout << x << endl;
+    modifyWithReference(x);
+    cout << x << endl;
+
+    Book *book_arr = new Book[3];
+    for (int i = 0; i < 3; i++)
+    {
+        book_arr[i].input("abc", i * 3.12);
+        book_arr[i].display();
+    }
+    delete[] book_arr;
 
     return 0;
 }
