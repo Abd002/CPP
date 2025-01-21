@@ -126,7 +126,7 @@ void modify(int &x) {  // x is a reference/alias parameter
   - **Compile-Time Polymorphism** (**overload**) same function with diffrent attributes, early binding
 - ## **Types of Inheritance**
 
-  - if u choose inheritance type otherwise public u cann't do this `Employee* emp = new Manager("Alice", 40, "HR"); // ❌ ERROR:`
+  - if u choose inheritance type otherwise public u cann't do this `Employee* emp = new Manager("Alice", 40, "HR"); // ❌ ERROR:` because : Manager is not publicly related to Employee
 
   - | Inheritance Type | Effect on `public` Members of Base    | Effect on `protected` Members of Base | Effect on `private` Members of Base |
     | ---------------- | ------------------------------------- | ------------------------------------- | ----------------------------------- |

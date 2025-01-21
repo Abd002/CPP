@@ -10,6 +10,7 @@
 #include "Customer.hpp"
 #include "Worker.hpp"
 #include "EmployeeAdvanced.hpp"
+#include "Box.hpp"
 using namespace std;
 
 struct car_str
@@ -144,5 +145,10 @@ int main()
         it->displayDetails();
     }
 
+    Box box(1, 2, 3);
+    BoxManipulator ok;
+    cout << ok.volume(box) << endl;
+    ok.resize(box, 5, 5, 5);
+    cout << ok.volume(box) << endl;
     return 0;
 }
