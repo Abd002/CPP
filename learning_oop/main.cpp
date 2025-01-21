@@ -9,6 +9,7 @@
 #include "Book.hpp"
 #include "Customer.hpp"
 #include "Worker.hpp"
+#include "EmployeeAdvanced.hpp"
 using namespace std;
 
 struct car_str
@@ -123,14 +124,25 @@ int main()
 
     firstCustomer.getBankAccount().withdraw(100).deposit(100);
     cout << firstCustomer.getBankAccount().getBalance() << endl;
-
-    FullTimeWorker f_worker("abd002", 22000);
-    PartTimeWorker p_worker("abd002", 100);
-    Worker *bptr[] = {&f_worker, &p_worker};
-    p_worker.setHoursWorked(100);
-    for (auto it : bptr)
     {
-        it->displaySalary();
+        FullTimeWorker f_worker("abd002", 22000);
+        PartTimeWorker p_worker("abd002", 100);
+        Worker *bptr[] = {&f_worker, &p_worker};
+        p_worker.setHoursWorked(100);
+        for (auto it : bptr)
+        {
+            it->displaySalary();
+        }
     }
+
+    Manager manager("salah", 23, "programming");
+    Engineer engineer("Abd002", 22, "ps");
+    EmployeeAdvanced *employees[] = {&manager, &engineer};
+
+    for (auto it : employees)
+    {
+        it->displayDetails();
+    }
+
     return 0;
 }

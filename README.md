@@ -117,6 +117,7 @@ void modify(int &x) {  // x is a reference/alias parameter
   - best deal with abstracted class is to make pointer of it and access all other derived classes
   - u must make Destructor as virtual in abstracted class **in cass u deal with it's pointer** it will call sub-class Destructor also
 - ## **Virtual**
+  - If you don't declare a function as virtual in the base class, will use compile-time (static) binding, meaning the function that gets called is determined by the type of the pointer/reference, not the actual object.
   - **pure Virtual** `virtual void pureVirtualFunction() = 0;` -> then u must implement this function in it's sub-classes
   - **default Virtual** `virtual void pureVirtualFunction(){};`
   - when u implement this function in sub-classes use this syntax `void pureVirtualFunction() override {}`
@@ -124,6 +125,8 @@ void modify(int &x) {  // x is a reference/alias parameter
   - **Runtime Polymorphism** using **virtual** and and **method overriding**, late binding
   - **Compile-Time Polymorphism** (**overload**) same function with diffrent attributes, early binding
 - ## **Types of Inheritance**
+
+  - if u choose inheritance type otherwise public u cann't do this `Employee* emp = new Manager("Alice", 40, "HR"); // ❌ ERROR:`
 
   - | Inheritance Type | Effect on `public` Members of Base    | Effect on `protected` Members of Base | Effect on `private` Members of Base |
     | ---------------- | ------------------------------------- | ------------------------------------- | ----------------------------------- |
