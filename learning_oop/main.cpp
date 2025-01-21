@@ -8,6 +8,7 @@
 #include "DynamicArray.hpp"
 #include "Book.hpp"
 #include "Customer.hpp"
+#include "Worker.hpp"
 using namespace std;
 
 struct car_str
@@ -123,5 +124,13 @@ int main()
     firstCustomer.getBankAccount().withdraw(100).deposit(100);
     cout << firstCustomer.getBankAccount().getBalance() << endl;
 
+    FullTimeWorker f_worker("abd002", 22000);
+    PartTimeWorker p_worker("abd002", 100);
+    Worker *bptr[] = {&f_worker, &p_worker};
+    p_worker.setHoursWorked(100);
+    for (auto it : bptr)
+    {
+        it->displaySalary();
+    }
     return 0;
 }

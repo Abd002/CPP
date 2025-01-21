@@ -112,3 +112,21 @@ void modify(int &x) {  // x is a reference/alias parameter
 - ## **Encapsulation**
   - Marking data members as private to prevent direct modification from outside the class.
   - Providing public getter and setter methods to control access to private data members.
+- ## **Abstraction**
+  - abstracted class cann't be called if it using **pure virtual function** will cause error
+  - best deal with abstracted class is to make pointer of it and access all other derived classes
+  - u must make Destructor as virtual in abstracted class **in cass u deal with it's pointer** it will call sub-class Destructor also
+- ## **Virtual**
+  - **pure Virtual** `virtual void pureVirtualFunction() = 0;` -> then u must implement this function in it's sub-classes
+  - **default Virtual** `virtual void pureVirtualFunction(){};`
+  - when u implement this function in sub-classes use this syntax `void pureVirtualFunction() override {}`
+- ## **Polymorphism**
+  - **Runtime Polymorphism** using **virtual** and and **method overriding**, late binding
+  - **Compile-Time Polymorphism** (**overload**) same function with diffrent attributes, early binding
+- ## **Types of Inheritance**
+
+  - | Inheritance Type | Effect on `public` Members of Base    | Effect on `protected` Members of Base | Effect on `private` Members of Base |
+    | ---------------- | ------------------------------------- | ------------------------------------- | ----------------------------------- |
+    | `public`         | **Remain public** in derived class    | **Remain protected** in derived class | **Not inherited (inaccessible)**    |
+    | `protected`      | **Become protected** in derived class | **Remain protected** in derived class | **Not inherited**                   |
+    | `private`        | **Become private** in derived class   | **Become private** in derived class   | **Not inherited**                   |
