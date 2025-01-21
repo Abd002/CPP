@@ -11,6 +11,7 @@
 #include "Worker.hpp"
 #include "EmployeeAdvanced.hpp"
 #include "Box.hpp"
+#include "Person.hpp"
 using namespace std;
 
 struct car_str
@@ -150,5 +151,10 @@ int main()
     cout << ok.volume(box) << endl;
     ok.resize(box, 5, 5, 5);
     cout << ok.volume(box) << endl;
+
+    Manager_ manager_("Abd002", 22, "Cairo", "12345", "Engineering");
+    manager_.showDetails();
+    showManagerInfo(manager_);
+
     return 0;
 }

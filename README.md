@@ -97,7 +97,8 @@ void modify(int &x) {  // x is a reference/alias parameter
         friend classB;
 
         //this function is implemented out of class and can acces ...
-        friend void printX(const MyClass& obj);
+        //write class if u use object of another class but here u can delete it
+        friend void printX(const class MyClass& obj);
     };
   ```
 
@@ -109,10 +110,10 @@ void modify(int &x) {  // x is a reference/alias parameter
 - ## **method chaining**
   - what is this : `account.deposit(1000).withdraw(200).`
   - to use it then `deposit and withdraw` methods should return refernce to the same class ex:`BankAccount &BankAccount::withdraw(int value)`
-- ## **Encapsulation**
+- ## **<u>Encapsulation</u>**
   - Marking data members as private to prevent direct modification from outside the class.
   - Providing public getter and setter methods to control access to private data members.
-- ## **Abstraction**
+- ## **<u>Abstraction</u>**
   - abstracted class cann't be called if it using **pure virtual function** will cause error
   - best deal with abstracted class is to make pointer of it and access all other derived classes
   - u must make Destructor as virtual in abstracted class **in cass u deal with it's pointer** it will call sub-class Destructor also
@@ -121,10 +122,10 @@ void modify(int &x) {  // x is a reference/alias parameter
   - **pure Virtual** `virtual void pureVirtualFunction() = 0;` -> then u must implement this function in it's sub-classes
   - **default Virtual** `virtual void pureVirtualFunction(){};`
   - when u implement this function in sub-classes use this syntax `void pureVirtualFunction() override {}`
-- ## **Polymorphism**
+- ## **<u>Polymorphism</u>**
   - **Runtime Polymorphism** using **virtual** and and **method overriding**, late binding
   - **Compile-Time Polymorphism** (**overload**) same function with diffrent attributes, early binding
-- ## **Types of Inheritance**
+- ## **Types of <U>Inheritance</u>**
 
   - if u choose inheritance type otherwise public u cann't do this `Employee* emp = new Manager("Alice", 40, "HR"); // ❌ ERROR:` because : Manager is not publicly related to Employee
 
