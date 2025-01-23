@@ -238,3 +238,45 @@ void modify(int &x) {  // x is a reference/alias parameter
 - function or function object (functor) that returns a boolean value
 - typically passed to algorithms such as `find_if`, `sort`, or `remove_if` to filter or evaluate data based on a condition. -> using this methods with list is better than vector
 - can be **Lambda Function Predicate**
+
+# Templates
+
+- feature that allows you to write generic and reusable code.
+- Function Templates
+- Class Templates
+- Template Specialization `template <>` then `ReturnType functionName<Type>() {}`
+- Multiple Template Parameters
+- Default Template Arguments
+- Variadic Templates
+- Template Metaprogramming -> recursive template that computes the factorial of a number at compile time.
+- examples
+
+  ```cpp
+    template <typename T, typename U = int>
+    class ClassName {
+        T data;
+    public:
+        ClassName(T value) : data(value) {}
+    };//to make object use Classname<dataType>test;
+
+    // Generic template for function
+    template <typename... Args>
+    void print(Args... args) {
+        (cout << ... << args) << endl;  // C++17 fold expression
+    }
+    // Specialization for type `char*` (C-style string)
+    template <>
+    const char* print<char*>(const char* value) {
+        return "This is a string!";
+    }
+
+    template <int N>
+    struct Factorial {
+        static const int value = N * Factorial<N - 1>::value;
+    };
+    template <>
+    struct Factorial<0> {
+        static const int value = 1;
+    };
+    //call it using Factorial<5>::value
+  ```
