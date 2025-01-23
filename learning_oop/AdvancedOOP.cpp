@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <string>
+#include <string.h>
 using namespace std;
 
 class Calculator
@@ -166,6 +167,68 @@ public:
     }
 };
 
+class MyString
+{
+private:
+    char *data;
+
+public:
+    MyString(const char *initData)
+    {
+        data = new char[strlen(initData) + 1];
+        strcpy(data, initData);
+    }
+
+    ~MyString()
+    {
+        delete[] data;
+    }
+
+    // Copy Constructor
+    MyString(const MyString &other)
+    {
+        cout << "copy\n";
+        data = new char[strlen(other.data) + 1];
+        strcpy(data, other.data);
+    }
+
+    // Copy Assignment Operator
+    MyString &operator=(const MyString &other)
+    {
+        if (this != &other)
+        {
+            delete[] data;                           // Release the old resource
+            data = new char[strlen(other.data) + 1]; // Allocate new memory
+            strcpy(data, other.data);                // Copy the data
+        }
+        return *this;
+    }
+
+    // Move Constructor
+    MyString(MyString &&other) noexcept : data(other.data)
+    {
+        cout << "move\n";
+        other.data = nullptr; // Null out the other's pointer
+    }
+
+    // Move Assignment Operator
+    MyString &operator=(MyString &&other) noexcept
+    {
+        if (this != &other)
+        {
+            delete[] data;        // Release the old resource
+            data = other.data;    // Transfer ownership
+            other.data = nullptr; // Null out the other's pointer
+        }
+        return *this;
+    }
+
+    void print() const
+    {
+        std::cout << data << std::endl;
+    }
+};
+
 void Try(void)
 {
     Calculator calc;
@@ -218,6 +281,13 @@ void Try(void)
     }
     ((Book *)libraryItem[0])->borrow();
     ((Book *)libraryItem[0])->borrow("abd002");
+
+    MyString s1("Hello");
+    MyString s2 = move(s1); // Use move constructor
+    s1.print();
+
+    s2.print(); // Prints "Hello"
+    // s1 is now in a valid but unspecified state (data is nullptr)
 
     return;
 }

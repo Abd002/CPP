@@ -37,49 +37,16 @@ void modify(int &x) {  // x is a reference/alias parameter
     Book(const std::string &title, double price); // Parameterized constructor
     ```
 - `Person *student= new Student();` notice that u cann't access Student methods unless u convert it using this `((Student*)student)->(studentMethods)`
+- u can disable default copy constructor and assignment using
+
+  ```c
+  // Delete Copy Constructor and Copy Assignment Operator
+  MyString(const MyString&) = delete;
+  MyString& operator=(const MyString&) = delete;
+  ```
+
 - ## **copy constructor**
   syntax : `DynamicMatrix::DynamicMatrix(const DynamicMatrix &other)`
-- ## **assignment operator**
-
-  - syntax : `DynamicMatrix& operator=(const DynamicMatrix &other);`
-  - `DynamicMatrix&` : commonly used in assignment operators to support chained assignments.
-    ex. a = b = c ;
-  - steps used :
-    1. first check if it self assignment
-    2. free old memory if exist
-    3. copy data as required (deep or shallow)
-    4. return `*this` which will return reference to current object
-
-- ## **L-value and R-value**
-
-  - `const std::string&` allows binding to both lvalues and rvalues because of **const**
-
-    - ```c
-      Car(std::string& make, std::string& model, int year)
-      Car myCar("Toyota", "Camry", 2022);  // ❌ ERROR rvalue
-
-      std::string carMake = "Toyota";
-      std::string carModel = "Camry";
-      Car myCar(carMake, carModel, 2022);  // ✅ Works, because carMake is an lvalue
-      ```
-
-  - fix it with **const** and it will work with both
-  - ### **Lvalue**
-    - object that has a name
-    - can be referenced `int& ref = a;`
-  - ### **Rvalue**
-    - temporary value that doesn’t persist
-    - can be referenced `int&& ref = 10;` called Rvalue references used with **move**
-    - `x + 5` is Rvalue
-
-- ## **Move**
-  - means transferring ownership of a resource from one object to another without copying it.
-  - ```c
-    std::string s = "Hello";
-    std::string t = std::move(s);  // Moves data to 't'
-    std::cout << s;  // ❌ Undefined behavior! (s is now empty)
-    ```
-  - in assignment operator in string class we will use Rvalue references with **move** to move data
 - ## **Access Specifier**
   1. `public` -> accessible from anywhere
   2. `private` -> only accessible inside the class itself (or by friends of the class).
@@ -160,3 +127,82 @@ void modify(int &x) {  // x is a reference/alias parameter
   - **final with Functions** : Prevents a virtual function from being overridden in any derived class.
     `virtual void functionName() final;`
   - missuse of it will cause Compiler Error
+- ## **noexcept**
+  - `MyString(MyString &&other) noexcept` indicate that a function does not throw any exceptions.
+  - used to dealing with move assignment operator and move constructor
+  - make diffrence between copy and move assignment
+    ```c
+      MyString s2 = std::move(s1);//it will call move constructor
+      MyString s2 = (s1);//will call copy constructor
+    ```
+- ## **assignment operator**
+
+  - syntax : `DynamicMatrix& operator=(const DynamicMatrix &other);`
+  - `DynamicMatrix&` : commonly used in assignment operators to support chained assignments.
+    ex. a = b = c ;
+  - steps used :
+    1. first check if it self assignment
+    2. free old memory if exist
+    3. copy data as required (deep or shallow)
+    4. return `*this` which will return reference to current object
+
+- ## **L-value and R-value**
+
+  - `const std::string&` allows binding to both lvalues and rvalues because of **const**
+
+    - ```c
+      Car(std::string& make, std::string& model, int year)
+      Car myCar("Toyota", "Camry", 2022);  // ❌ ERROR rvalue
+
+      std::string carMake = "Toyota";
+      std::string carModel = "Camry";
+      Car myCar(carMake, carModel, 2022);  // ✅ Works, because carMake is an lvalue
+      ```
+
+  - fix it with **const** and it will work with both because : because r-values don't need to be modified.
+  - ### **Lvalue**
+    - object that has a name
+    - can be referenced `int& ref = a;`
+  - ### **Rvalue**
+    - temporary value that doesn’t persist
+    - can be referenced `int&& ref = 10;` called Rvalue references used with **move**
+    - `x + 5` is Rvalue
+
+- ## **Move**
+  - means transferring ownership of a resource from one object to another without copying it.
+  - ```c
+    std::string s = "Hello";
+    std::string t = std::move(s);  // Moves data to 't' call move constructor
+    std::cout << s;  // ❌ Undefined behavior! (s is now empty)
+    ```
+  - in assignment operator in string class we will use Rvalue references with **move** to move data
+
+# Exception Handling
+
+- using **try-catch** block to catch any **throw** happens in the programm otherwise it will **terminate**
+- use throw to rise exception of specific object then u can catch this object
+- you can throw any type of object and catch any type -> use it to catch specific exception
+- throw like return it exit the function immediatlty
+- u can chain any number of catch block to catch specific type
+- example
+
+  ```C
+  class BankException : public std::exception {
+  public:
+      virtual const char* what() const noexcept {
+          return "Bank exception occurred!";
+      }
+  };
+
+  /*
+  in code u will throw BankException
+  if it in try-catch block it will be caught
+  */
+  try {}catch(const BankException&e){}catch(const exception&e){}
+  ```
+
+- note that if u made class of that inherit from std::exception and u write in what() function then u could catch `const exception&e` and it will print the string in what() function of the class u made -> dynamic binding
+
+# Overload Operators
+
+-
