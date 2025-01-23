@@ -36,6 +36,7 @@ void modify(int &x) {  // x is a reference/alias parameter
     Book(): title(""), price(0.0) {}; // ✅ Default constructor
     Book(const std::string &title, double price); // Parameterized constructor
     ```
+- `Person *student= new Student();` notice that u cann't access Student methods unless u convert it using this `((Student*)student)->(studentMethods)`
 - ## **copy constructor**
   syntax : `DynamicMatrix::DynamicMatrix(const DynamicMatrix &other)`
 - ## **assignment operator**
@@ -107,6 +108,9 @@ void modify(int &x) {  // x is a reference/alias parameter
   - used for deallocates the memory to prevent memory leaks.
   - when u creat an instance it will be called when object goes out of scope -> stack allocation.
   - if u create the object using dynamic allocation `DynamicArray *arr = new DynamicArray(5);` it will be called after using `delete arr;` -> heap allocation.
+  - **dealing with Dynamic allocate** `Shape* shapePtr = new Circle();`
+    - When a base class destructor is non-virtual, only the base class destructor is called when deleting a derived class object through a base class pointer.
+    - The derived class’s destructor never executes, leading to incomplete destruction and potential memory leaks.
 - ## **method chaining**
   - what is this : `account.deposit(1000).withdraw(200).`
   - to use it then `deposit and withdraw` methods should return refernce to the same class ex:`BankAccount &BankAccount::withdraw(int value)`
@@ -123,8 +127,23 @@ void modify(int &x) {  // x is a reference/alias parameter
   - **default Virtual** `virtual void pureVirtualFunction(){};`
   - when u implement this function in sub-classes use this syntax `void pureVirtualFunction() override {}`
 - ## **<u>Polymorphism</u>**
-  - **Runtime Polymorphism** using **virtual** and and **method overriding**, late binding
-  - **Compile-Time Polymorphism** (**overload**) same function with diffrent attributes, early binding
+  - **Runtime Polymorphism** (**dynamic binding**)
+    - using **virtual** and and **method overriding** for allawing **dynamic binding**, late binding
+    - The virtual keyword tells the compiler to use runtime polymorphism, meaning the function that gets called depends on the actual object type, not the pointer type.
+    - `vPtr->move(); calls Car::move()` vPtr is base class pointer
+    - Use dynamic binding when function behavior should be overridden in derived classes
+    - C++ uses a mechanism called vtable (virtual table) and vptr (virtual table pointer) to determine which function to call at runtime.
+      - The compiler creates a vtable (virtual table) for each class that has at least one virtual function.
+      - Each object of a class containing virtual functions has a hidden pointer (vptr) pointing to the class's vtable.
+      - The vtable is an array of function pointers.
+      - Each class has its own vtable containing function addresses for its virtual functions.
+      - If a derived class overrides a virtual function, the vtable entry is updated to point to the derived class function.
+  - **Compile-Time Polymorphism** (**Static Binding**)
+    - (**overload**) functions have the same name but different parameter lists (different number or type of parameters)., early binding
+    - When the program is compiled, the compiler looks at the function call and determines which version of the overloaded function to invoke based on the arguments' number and types.
+    - static binding ignores object type.
+    - `v.start(); calls Vehicle::start().`
+    - Use static binding when function behavior should not change based on object type
 - ## **Types of <U>Inheritance</u>**
 
   - if u choose inheritance type otherwise public u cann't do this `Employee* emp = new Manager("Alice", 40, "HR"); // ❌ ERROR:` because : Manager is not publicly related to Employee
@@ -134,3 +153,10 @@ void modify(int &x) {  // x is a reference/alias parameter
     | `public`         | **Remain public** in derived class    | **Remain protected** in derived class | **Not inherited (inaccessible)**    |
     | `protected`      | **Become protected** in derived class | **Remain protected** in derived class | **Not inherited**                   |
     | `private`        | **Become private** in derived class   | **Become private** in derived class   | **Not inherited**                   |
+
+- ## **Final Specifier**
+  - **final with Classes** : Prevents further inheritance of a class.
+    `class ClassName final {};`
+  - **final with Functions** : Prevents a virtual function from being overridden in any derived class.
+    `virtual void functionName() final;`
+  - missuse of it will cause Compiler Error

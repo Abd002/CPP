@@ -14,6 +14,8 @@
 #include "Person.hpp"
 using namespace std;
 
+void Try(void);
+
 struct car_str
 {
     string make;
@@ -156,5 +158,6 @@ int main()
     manager_.showDetails();
     showManagerInfo(manager_);
 
+    Try();
     return 0;
 }
