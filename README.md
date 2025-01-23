@@ -218,3 +218,23 @@ void modify(int &x) {  // x is a reference/alias parameter
 - overload any other operator like this
   `DynamicMatrix& operator=(const DynamicMatrix &other){}` and u can use any type u want ex -> `DynamicMatrix& operator=(const int x){size = x;return *this;}`
 - don't forget to return
+
+# Functor
+
+- function object : any object that can be called like a function. This is achieved by **overloading the operator() in a class**.
+- Compatibility with STL
+- ```cpp
+  class MyFunctor {
+  public:
+      void operator()(int x) {
+          std::cout << "This is a functor, called with " << x << std::endl;
+      }
+  };
+  // will be called like that {MyFunctor functor; functor(5);}
+  ```
+
+# Predicate
+
+- function or function object (functor) that returns a boolean value
+- typically passed to algorithms such as `find_if`, `sort`, or `remove_if` to filter or evaluate data based on a condition. -> using this methods with list is better than vector
+- can be **Lambda Function Predicate**
