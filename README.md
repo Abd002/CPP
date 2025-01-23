@@ -186,7 +186,7 @@ void modify(int &x) {  // x is a reference/alias parameter
 - u can chain any number of catch block to catch specific type
 - example
 
-  ```C
+  ```cpp
   class BankException : public std::exception {
   public:
       virtual const char* what() const noexcept {
@@ -205,4 +205,16 @@ void modify(int &x) {  // x is a reference/alias parameter
 
 # Overload Operators
 
--
+- overload the input and output stream
+  ```cpp
+    // ostream for cout
+    // use friend so u can use it with cin >> c1 -> not c1.operator>>(cin);
+    friend istream &operator>>(istream &in, Complex &c)
+    {
+        in >> c.real >> c.imaginary;
+        return in;
+    }
+  ```
+- overload any other operator like this
+  `DynamicMatrix& operator=(const DynamicMatrix &other){}` and u can use any type u want ex -> `DynamicMatrix& operator=(const int x){size = x;return *this;}`
+- don't forget to return
