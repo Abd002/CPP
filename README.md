@@ -166,6 +166,7 @@ void modify(int &x) {  // x is a reference/alias parameter
   - ### **Rvalue**
     - temporary value that doesn’t persist
     - can be referenced `int&& ref = 10;` called Rvalue references used with **move**
+    - can be used by `const int& ref = 10;`
     - `x + 5` is Rvalue
 
 - ## **Move**
