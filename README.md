@@ -281,3 +281,7 @@ void modify(int &x) {  // x is a reference/alias parameter
     };
     //call it using Factorial<5>::value
   ```
+# Resource Management
+- **Rule of Three**: If you define a custom destructor, copy constructor, or copy assignment operator, you generally need to define all three to manage resources properly.
+- **Rule of Five**: With C++11, you should also define move constructor and move assignment operator, in addition to the three from Rule of Three, to support move semantics.
+- **Rule of Zero** (RAII): Ideally, use smart pointers (e.g., `std::unique_ptr`) to avoid manually managing resources, eliminating the need to define any of the five special functions.
