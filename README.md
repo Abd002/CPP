@@ -25,7 +25,7 @@ void modify(int &x) {  // x is a reference/alias parameter
 # OOP
 
 - if u create static member don't forget to define it in .cpp or it will case linker error
-- const member function`int getId() const;` guarantees not to modify the object
+- const member function`int getId() const;` guarantees not to modify the object and **when u create const instance u can only use const methods**
 - **deep copy** : creating a new object and allocating new memory for it
 - **shallow copy** : only copies the pointer, both objects share the same memory
 - use structs when u need
