@@ -40,9 +40,9 @@ void modify(int &x) {  // x is a reference/alias parameter
 - u can disable default copy constructor and assignment using
 
   ```c
-  // Delete Copy Constructor and Copy Assignment Operator
+  // Delete Copy Constructor and Copy Assignment Operator or u can make it default
   MyString(const MyString&) = delete;
-  MyString& operator=(const MyString&) = delete;
+  MyString& operator=(const MyString&) = default;
   ```
 
 - ## **copy constructor**
